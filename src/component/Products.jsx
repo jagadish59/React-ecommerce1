@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
+
 import Skeleton from "react-loading-skeleton"
+import { NavLink } from 'react-router-dom'
 
 export default function
 
@@ -9,6 +11,8 @@ export default function
     const [filter, setFilter] = useState(data)
     const [loding, setLoding] = useState(false)
     let componentmount = true
+
+  
 
     useEffect(() => {
         const getProduct = async () => {
@@ -56,14 +60,14 @@ export default function
                 return (
                     <>
                     <div className="col-md-3 mb-4">
-                        <div class="card h-100 text-center p-4" key={product.id}>
-                            <img src={product.image} class="card-img-top" alt={product.title} height="250px"/>
-                                <div class="card-body">
-                                    <h5 class="card-title mb-0">{product.title.substring(0,12)}...</h5>
-                                    <p class="card-text fw-bold">
+                        <div className="card h-100 text-center p-4" key={product.id}>
+                            <img src={product.image} className="card-img-top" alt={product.title} height="250px"/>
+                                <div className="card-body">
+                                    <h5 className="card-title mb-0">{product.title.substring(0,12)}...</h5>
+                                    <p className="card-text fw-bold">
                                         ${product.price}
                                     </p>
-                                    <a href="#" class="btn btn-outline-dark">Buy Now</a>
+                                    <NavLink to={`products/${product.id}`} className="btn btn-outline-dark">Buy Now</NavLink>
                                 </div>
                         </div>
                         </div>
