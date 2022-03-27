@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import {addCart} from '../redux/action'
 import { NavLink, useParams } from 'react-router-dom'
 import Skeleton from "react-loading-skeleton"
+import axios from 'axios'
 
 export const Product = () => {
 
@@ -16,14 +17,20 @@ export const Product = () => {
     }
 
     useEffect(() => {
-        const getproduct = async () => {
-            setLoading(true)
-            const response = await fetch(`http://fakestoreapi.com/products/${id}`)
-            setProduct(await response.json())
-            setLoading(false)
+        // const getproduct = async () => {
+        //     setLoading(true)
+        //     const response = await fetch(`http://fakestoreapi.com/products/${id}`)
+        //     setProduct(await response.json())
+        //     setLoading(false)
 
-        }
-        getproduct()
+        // }
+        axios.get(`http://fakestoreapi.com/products/${id}`)
+        .then(response=>{
+            setProduct( response.data)
+            setLoading(false)
+            
+        }).catch(err=>console.log(err))
+        
     }, [])
     const Loading = () => {
         return (

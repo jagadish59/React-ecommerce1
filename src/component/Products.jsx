@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import Skeleton from "react-loading-skeleton"
 import { NavLink } from 'react-router-dom'
+import axios from 'axios'
 
 export default function
 
@@ -15,19 +16,38 @@ export default function
   
 
     useEffect(() => {
-        const getProduct = async () => {
+        // const getProduct = async () => {
+        //     setLoding(true)
+        //     const response = await fetch("http://fakestoreapi.com/products");
+        //     if (componentmount) {
+        //         const dat=await response.clone().json()
+        //         const data=await response.json()
+        //         console.log(dat)
+        //         console.log(data)
+
+        //         setData(data)
+        //         setFilter(data)
+        //         setLoding(false)
+        //     }
+        //     return () => {
+        //         componentmount = false
+        //     }
+        // }
+        
+        // getProduct()
+
+        axios.get('http://fakestoreapi.com/products')
+        .then(response=>{
             setLoding(true)
-            const response = await fetch("http://fakestoreapi.com/products");
-            if (componentmount) {
-                setData(await response.clone().json())
-                setFilter(await response.json())
-                setLoding(false)
-            }
-            return () => {
-                componentmount = false
-            }
-        }
-        getProduct()
+            console.log(response)
+            setData( response.data)
+            setFilter( response.data)
+            setLoding(false)
+
+        })
+        .catch(err=>{console.log(err)})
+
+
 
     }, [])
     const Loading = () => {
